@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "user": {
+    "fdnummer": "fd1234",
+    "vorname": "Hubert",
+    "nachname": "Meier",
+    "passwort": "1234",
+    "email": "meier@hs-fulda.de",
+    "geburtsdatum": "27.3.1951",
+    "uuid": "eine folge von zeichen",
+    "profilId": 1
+  },
+  "profile": {
+    "profilId": 1,
+    "uuid": "eine folge von zeichen",
+    "displayName": "Hubi",
+    "tier": true,
+    "rauchen": false,
+    "bewertung": 4.5,
+    "fahrzeug": [
+      "Dacia Spring",
+      "VW Golf"
+    ],
+    "kmgefahren": 723.4,
+    "punktegesammelt": 200
+  }
+}

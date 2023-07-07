@@ -1,0 +1,27 @@
+[
+  {
+    "author": {
+      "firstName": "Sophia",
+      "id": "sophias_ID",
+      "lastName": "Loren",
+      "imageUrl": "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSTbPnc5C4-Sgn4ktAVFYLzGj6R1m7RQiZtLWGRPohIrtByUNfQIoL72YYDuxWWrbUko3zaS_DcMb6z8fQ"
+    },
+    "createdAt": 1655648404000,
+    "id": "message_0002",
+    "status": "seen",
+    "text": "Ich möchte bitte mitfahren️",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Marcello",
+      "id": "marcellos_ID",
+      "lastName": "Mastroianni"
+    },
+    "createdAt": 1655648406000,
+    "id": "message_0001",
+    "status": "seen",
+    "text": "Gerne, ich hole Dich pünktlich ab.",
+    "type": "text"
+  }
+]
