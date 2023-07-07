@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class CircularIconButtonWidget extends StatelessWidget {
-  final formKey = GlobalKey<FormBuilderState>();
   String fieldName;
 
   CircularIconButtonWidget(
@@ -13,7 +11,8 @@ class CircularIconButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        formKey.currentState!.fields[fieldName]!.didChange("");
+        // TODO CircularIconButton gedrückt ?
+        //formKey.currentState!.fields[fieldName]!.didChange("");
       },
       icon: Container(
         width: 24,

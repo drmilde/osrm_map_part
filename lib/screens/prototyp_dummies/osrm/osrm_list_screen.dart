@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:get/get.dart';
-import 'package:projects/sb/screens/maps/polyline_screen.dart';
 
-import '../../../../services/controller/ug_state_controller.dart';
+import '../../../../services/maps/nominatim.dart';
+import '../../../../services/maps/remote_services.dart';
 import '../../../../services/osrm/model/helper_generate_step_description.dart';
 import '../../../../services/osrm/model/nominatim_cache.dart';
 import '../../../../services/osrm/model/osrm.dart' as osrm;
 import '../../../../services/osrm/model/osrm_service_provider.dart';
-import '../../../../services/unigo_service.dart';
-import '../../../widgets/custom_round_button.dart';
-import '../../../../services/maps/nominatim.dart';
-import '../../../../services/maps/remote_services.dart';
-import '../widgets/dummy_circular_icon_button_widget.dart';
+import '../../maps/polyline_screen.dart';
+import '../../widgets/custom_round_button.dart';
 
 class OsrmListScreen extends StatefulWidget {
   const OsrmListScreen({Key? key}) : super(key: key);
@@ -23,9 +17,6 @@ class OsrmListScreen extends StatefulWidget {
 }
 
 class _OsrmListScreenState extends State<OsrmListScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
-  UGStateController _controller = Get.find();
-  UniGoService service = UniGoService();
   osrm.Osrm osrmRoute = osrm.Osrm.empty();
   String search = "9.41188,50.63475;9.68522,50.56611";
   HelperGenerateStepDescription _generate = HelperGenerateStepDescription();
@@ -54,7 +45,7 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildForm(context),
+              //_buildForm(context),
               CustomRoundButton(
                 height: 24,
                 text: ("karte"),
@@ -70,22 +61,17 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
                 },
               ),
               SizedBox(height: 8),
-              Obx(
-                () {
-                  int _change = _controller.somethingChanged.value;
-                  return FutureBuilder<bool>(
-                    future: _loadOsrm(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return _buildListView(snapshot);
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return CircularProgressIndicator();
-                    },
-                  );
-                },
-              ),
+            FutureBuilder<bool>(
+              future: _loadOsrm(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return _buildListView(snapshot);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return CircularProgressIndicator();
+              },
+            ),
               SizedBox(
                 height: 16,
               ),
@@ -150,6 +136,7 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
     );
   }
 
+  /*
   Widget _buildForm(BuildContext context) {
     return FormBuilder(
       key: _formKey,
@@ -199,6 +186,8 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
     );
   }
 
+   */
+
   Future<String?> _getCoordString(String sterm) async {
     double lat = 0;
     double lng = 0;
@@ -225,6 +214,7 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
     return ("${lng},${lat}");
   }
 
+  /*
   Widget _buildFormTextField({
     required String name,
     required String labelText,
@@ -260,6 +250,7 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
     );
   }
 
+
   Widget _SubmitButton(
       {String text = "Submit", required VoidCallback callback}) {
     return ElevatedButton(
@@ -279,4 +270,5 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
       ),
     );
   }
+   */
 }
