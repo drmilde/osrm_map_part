@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../../services/osrm/model/osrm.dart' as osrm;
 
@@ -38,22 +39,25 @@ class _PolylineScreenState extends State<PolylineScreen> {
 
   Future<List<Polyline>> transfer() async {
     List<LatLng> points = List<LatLng>.empty(growable: true);
+    print(widget.steps.length);
     for (osrm.Step step in widget.steps) {
-      double lat = step.maneuver.location[1];
-      double long = step.maneuver.location[0];
-      print("${long},${lat};");
-
-      points.add(LatLng(lat, long));
+      print(step.geometry);
+      final polyline = decodePolyline(step.geometry);
+      print(polyline);
+      for (List<num> tuple in polyline) {
+        double lat = tuple[0].toDouble() / 10.0;
+        double long = tuple[1].toDouble() / 10.0;
+        print("${long},${lat};");
+        points.add(LatLng(lat, long));
+      }
     }
-
-
-
 
     List<Polyline> polyLines = [
       Polyline(
         points: points,
         strokeWidth: 4,
-        color: Colors.yellow,
+        color: Color.fromARGB(120, 255, 32, 32),
+        //color: Colors.transparent,
       )
     ];
 

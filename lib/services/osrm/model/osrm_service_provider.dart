@@ -9,11 +9,14 @@ class OSRMServiceProvider {
   //static String host = "localhost:8000";
   //static String host = "10.0.2.2:8000";
   //static String host = "193.174.29.13";
-  static String host = "router.project-osrm.org";
+  //static String host = "router.project-osrm.org";
+  static String host = "localhost:5678";
+  //static String host = "10.0.2.2:5678";
   static String apiPath = "/route/v1";
   static final queryParameters = {
-    'overview': 'false',
+    'overview': 'full',
     'steps': 'true',
+    'geometries':'polyline6',
   };
 
   /* HELPER */
