@@ -18,25 +18,6 @@ class PolylineScreen extends StatefulWidget {
 class _PolylineScreenState extends State<PolylineScreen> {
   late Future<List<Polyline>> polylines;
 
-  /*
-  Future<List<Polyline>> getPolylines() async {
-    final polyLines = [
-      Polyline(
-        points: [
-          LatLng(50.5, -0.09),
-          LatLng(51.3498, -6.2603),
-          LatLng(53.8566, 2.3522),
-        ],
-        strokeWidth: 4,
-        color: Colors.amber,
-      ),
-    ];
-    await Future<void>.delayed(const Duration(seconds: 3));
-    return polyLines;
-  }
-
-   */
-
   Future<List<Polyline>> transfer() async {
     List<LatLng> points = List<LatLng>.empty(growable: true);
     print(widget.steps.length);
@@ -45,8 +26,8 @@ class _PolylineScreenState extends State<PolylineScreen> {
       final polyline = decodePolyline(step.geometry);
       print(polyline);
       for (List<num> tuple in polyline) {
-        double lat = tuple[0].toDouble() / 10.0;
-        double long = tuple[1].toDouble() / 10.0;
+        double lat = tuple[0].toDouble() / 1.0;
+        double long = tuple[1].toDouble() / 1.0;
         print("${long},${lat};");
         points.add(LatLng(lat, long));
       }
@@ -57,7 +38,6 @@ class _PolylineScreenState extends State<PolylineScreen> {
         points: points,
         strokeWidth: 4,
         color: Color.fromARGB(120, 255, 32, 32),
-        //color: Colors.transparent,
       )
     ];
 
@@ -67,28 +47,12 @@ class _PolylineScreenState extends State<PolylineScreen> {
 
   @override
   void initState() {
-    //polylines = getPolylines();
     polylines = transfer();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    /*
-    final points = <LatLng>[
-      LatLng(51.5, -0.09),
-      LatLng(53.3498, -6.2603),
-      LatLng(48.8566, 2.3522),
-    ];
-
-    final pointsGradient = <LatLng>[
-      LatLng(55.5, -0.09),
-      LatLng(54.3498, -6.2603),
-      LatLng(52.8566, 2.3522),
-    ];
-
-     */
-
     return Scaffold(
         appBar: AppBar(title: const Text('Polylines')),
         body: Padding(
@@ -112,7 +76,6 @@ class _PolylineScreenState extends State<PolylineScreen> {
                           zoom: 10,
                           onTap: (tapPosition, point) {
                             setState(() {
-                              debugPrint('onTap');
                               polylines = transfer();
                             });
                           },
@@ -124,29 +87,6 @@ class _PolylineScreenState extends State<PolylineScreen> {
                             userAgentPackageName:
                                 'dev.fleaflet.flutter_map.example',
                           ),
-                          /*
-                          PolylineLayer(
-                            polylines: [
-                              Polyline(
-                                  points: points,
-                                  strokeWidth: 4,
-                                  color: Colors.purple),
-                            ],
-                          ),
-                          PolylineLayer(
-                            polylines: [
-                              Polyline(
-                                points: pointsGradient,
-                                strokeWidth: 4,
-                                gradientColors: [
-                                  const Color(0xffE40203),
-                                  const Color(0xffFEED00),
-                                  const Color(0xff007E2D),
-                                ],
-                              ),
-                            ],
-                          ),
-                           */
                           PolylineLayer(
                             polylines: snapshot.data!,
                             polylineCulling: true,

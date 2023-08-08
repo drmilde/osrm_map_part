@@ -16,7 +16,7 @@ class OSRMServiceProvider {
   static final queryParameters = {
     'overview': 'full',
     'steps': 'true',
-    'geometries':'polyline6',
+    'geometries':'polyline',
   };
 
   /* HELPER */
